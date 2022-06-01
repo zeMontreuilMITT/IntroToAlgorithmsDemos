@@ -1,25 +1,24 @@
-﻿int[] testInts = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
-Console.WriteLine(String.Join(' ', GetAllOddNumbers(testInts)));
+﻿// a function to check if a number is "perfect" (the sum of its divisors)
 
+Console.WriteLine(IsPerfectNumber(12));
+Console.WriteLine(IsPerfectNumber(6));
 
-int[] GetAllOddNumbers(int[] integers)
+bool IsPerfectNumber(int testValue)
 {
-    // declared arrays need a length
-    int[] oddNumbers = new int[integers.Length];
-    int oddCounter = 0;
+    int runningTotal = 0;
 
-    for(int index = 0; index < integers.Length; index++)
+    for (int i = testValue / 2; i > 0; i--)
     {
-        if(integers[index] % 2 == 0)
+        if (testValue % i == 0)
         {
-            Array.Resize(ref oddNumbers, oddNumbers.Length - 1);
+            runningTotal += i;
         }
-        else
+
+        if (testValue < runningTotal)
         {
-            oddNumbers[oddCounter] = integers[index];
-            oddCounter++;
+            return false;
         }
     }
 
-    return oddNumbers;
+    return testValue == runningTotal;
 }
